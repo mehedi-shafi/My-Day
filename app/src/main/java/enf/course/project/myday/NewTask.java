@@ -5,12 +5,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+
+import Database.DatabaseHandler;
+import Structures.DayTask;
 
 
 public class NewTask extends AppCompatActivity {
@@ -18,6 +25,10 @@ public class NewTask extends AppCompatActivity {
     private static TextView datePicker;
     private static Calendar myCalendar;
     private static DatePickerDialog.OnDateSetListener date;
+    private static EditText title, description;
+    private static TimePicker timePicker;
+    private static Button submit;
+    private DatabaseHandler dbh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +44,10 @@ public class NewTask extends AppCompatActivity {
         getWindow().setLayout((int) (width*.75), (int) (height*.75));
 
         datePicker = (TextView) findViewById(R.id.date_picker);
+        title = (EditText) findViewById(R.id.title_input);
+        description = (EditText) findViewById(R.id.description_input);
+        timePicker = (TimePicker) findViewById(R.id.time_picker);
+        submit = (Button) findViewById(R.id.submit_new);
 
         myCalendar = Calendar.getInstance();
         date = new DatePickerDialog.OnDateSetListener() {
@@ -58,9 +73,21 @@ public class NewTask extends AppCompatActivity {
             }
         });
 
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dbh = new DatabaseHandler(getApplicationContext());
+                
+            }
+        });
+
     }
 
-    public void updateLabel(){
+    private static DayTask createTask(){
+        return null;
+    }
+
+    private static void updateLabel(){
         String myFormat = "MM/dd/yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         datePicker.setText(sdf.format(myCalendar.getTime()));
