@@ -33,7 +33,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         String CREATE_EVENT_TABLE = "CREATE TABLE " + VARS.TABLE_NAME + "(" + VARS.ID_NAME + " INTEGER PRIMARY KEY, "
                 + VARS.DATE + " TEXT, " + VARS.TIME + " TEXT, " + VARS.TITLE + " TEXT, " + VARS.DESCRIPTION + " TEXT, "
-                + VARS.STATUS + " TEXT, " + VARS.REMINDER + " TEXT, " + VARS.NOTIFY_BEFORE + " INT);";
+                + VARS.STATUS + " TEXT);";
         sqLiteDatabase.execSQL(CREATE_EVENT_TABLE);
     }
 
@@ -86,9 +86,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(VARS.DESCRIPTION, task.getDescription());
         values.put(VARS.DATE, task.getDate());
         values.put(VARS.STATUS, "false");
-        values.put(VARS.REMINDER, Utilities.getBoolString(task.isReminder()));
         values.put(VARS.TIME, task.getTime());
-        values.put(VARS.NOTIFY_BEFORE, task.getReminder_time());
 
         db.insert(VARS.TABLE_NAME, null, values);
         Toast.makeText(context, "Task Added Successfully", Toast.LENGTH_SHORT).show();
