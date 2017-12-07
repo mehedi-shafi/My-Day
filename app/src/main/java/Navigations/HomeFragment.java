@@ -1,5 +1,6 @@
 package Navigations;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import enf.course.project.myday.NewTask;
 import enf.course.project.myday.R;
 
 /**
@@ -33,7 +35,7 @@ public class HomeFragment extends Fragment {
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "Worked", Toast.LENGTH_SHORT).show();
+                getActivity().startActivity(new Intent(getActivity(), NewTask.class));
             }
         });
 

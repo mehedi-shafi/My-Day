@@ -3,63 +3,63 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/input_background">
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+  <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:gravity="center">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Work Title"
-            android:gravity="center"
-            android:fontFamily="s"
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"
-            android:textSize="25sp"
-            android:textColor="#000000"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Add Work Title"
-            android:backgroundTint="#000000"/>
+      <LinearLayout
+          xmlns:android="http://schemas.android.com/apk/res/android"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:gravity="center"
+          android:id="@+id/lineral_input">
 
-        <TimePicker
-            android:id="@+id/time_picker"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+          <EditText
+              android:layout_width="200dp"
+              android:layout_height="wrap_content"
+              android:hint="@string/title"
+              android:backgroundTint="#000000"
+              android:layout_gravity="center"
+              android:gravity="center"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Set Time"
-            android:fontFamily="@string/calendar"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"
-            android:textSize="25sp"
-            android:textColor="#000000"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Description"
-            android:fontFamily="@string/calendar"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:textStyle="bold"
-            android:textSize="25sp"
-            android:textColor="#000000"/>
+          <TextView
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:id="@+id/date_picker"
+              android:textSize="20sp"
+              android:text="@string/date_picker"
+              android:textStyle="bold"
+              android:textColor="@color/shadow_dark" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Add Work Title"
-            android:backgroundTint="#000000"/>
+          <TimePicker
+              android:id="@+id/time_picker"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:timePickerMode="spinner"/>
 
+          <EditText
+              android:layout_width="200dp"
+              android:layout_height="wrap_content"
+              android:hint="@string/description_hint"
+              android:backgroundTint="#000000"
+              android:gravity="center"/>
+      </LinearLayout>
 
-    </LinearLayout>
+      <Button
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/submit_new"
+          android:text="@string/add"
+          android:layout_below="@id/lineral_input"
+          android:layout_alignParentRight="true"
+          android:layout_marginRight="75dp"
+          android:layout_marginTop="20dp"/>
+
+  </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
