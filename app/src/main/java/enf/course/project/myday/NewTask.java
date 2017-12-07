@@ -10,6 +10,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import java.sql.Time;
 import java.text.SimpleDateFormat;
@@ -29,6 +30,13 @@ public class NewTask extends AppCompatActivity {
     private static TimePicker timePicker;
     private static Button submit;
     private DatabaseHandler dbh;
+
+    //Strings for storing values
+    private static String dateString;
+    private static String timeStrng;
+    private static String descriptionString;
+    private static String titleString;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,20 +84,43 @@ public class NewTask extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dbh = new DatabaseHandler(getApplicationContext());
-                
+                if (notNull()) {
+                    dbh = new DatabaseHandler(getApplicationContext());
+                    dbh.addTask(createTask());
+                    Toast.makeText(NewTask.this, "Added successfully", Toast.LENGTH_SHORT).show();
+                    NewTask.this.finish();
+                }
+                else{
+                    Toast.makeText(NewTask.this, "Please fill the necessary fields", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
     }
 
+    private static boolean notNull(){
+        titleString = title.getText().toString();
+        descriptionString = description.getText().toString();
+        timeStrng = String.valueOf(timePicker.getHour()) + ":" + String.valueOf(timePicker.getMinute());
+        if (titleString != null && titleString.compareTo("") != 0 && descriptionString.compareTo("") != 0 && descriptionString != null)
+            return true;
+        return false;
+    }
     private static DayTask createTask(){
-        return null;
+
+        DayTask day = new DayTask();
+        day.setDate(dateString);
+        day.setTime(timeStrng);
+        day.setTime(titleString);
+        day.setDescription(descriptionString);
+        
+        return day;
     }
 
     private static void updateLabel(){
         String myFormat = "MM/dd/yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        datePicker.setText(sdf.format(myCalendar.getTime()));
+        dateString = sdf.format(myCalendar.getTime());
+        datePicker.setText(dateString);
     }
 }

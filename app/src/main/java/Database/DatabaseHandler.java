@@ -54,8 +54,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         while(!cursor.isAfterLast()){
             DayTask dayTask = new DayTask(cursor.getInt(cursor.getColumnIndex(VARS.ID_NAME)), Utilities.getBool(cursor.getString(cursor.getColumnIndex(VARS.STATUS))),
                     cursor.getString(cursor.getColumnIndex(VARS.TITLE)), cursor.getString(cursor.getColumnIndex(VARS.DESCRIPTION)),
-                    new Date(cursor.getString(cursor.getColumnIndex(VARS.DATE))), cursor.getInt(cursor.getColumnIndex(VARS.TIME)), cursor.getInt(cursor.getColumnIndex(VARS.NOTIFY_BEFORE)),
-                    Utilities.getBool(cursor.getString(cursor.getColumnIndex(VARS.REMINDER))));
+                    cursor.getString(cursor.getColumnIndex(VARS.DATE)), cursor.getString(cursor.getColumnIndex(VARS.TIME)));
             tasks.add(dayTask);
         }
         return tasks;
@@ -69,8 +68,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         while(!cursor.isAfterLast()){
             DayTask dayTask = new DayTask(cursor.getInt(cursor.getColumnIndex(VARS.ID_NAME)), Utilities.getBool(cursor.getString(cursor.getColumnIndex(VARS.STATUS))),
                     cursor.getString(cursor.getColumnIndex(VARS.TITLE)), cursor.getString(cursor.getColumnIndex(VARS.DESCRIPTION)),
-                    new Date(cursor.getString(cursor.getColumnIndex(VARS.DATE))), cursor.getInt(cursor.getColumnIndex(VARS.TIME)), cursor.getInt(cursor.getColumnIndex(VARS.NOTIFY_BEFORE)),
-                    Utilities.getBool(cursor.getString(cursor.getColumnIndex(VARS.REMINDER))));
+                    cursor.getString(cursor.getColumnIndex(VARS.DATE)), cursor.getString(cursor.getColumnIndex(VARS.TIME)));
             tasks.add(dayTask);
         }
         return tasks;
