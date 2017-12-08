@@ -111,7 +111,7 @@ public class NewTask extends AppCompatActivity {
         DayTask day = new DayTask();
         day.setDate(dateString);
         day.setTime(timeStrng);
-        day.setTime(titleString);
+        day.setTitle(titleString);
         day.setDescription(descriptionString);
         
         return day;

@@ -15,4 +15,5 @@
     <string name="title_sample">Task to do</string>
     <string name="description_sample">This is a sample task note</string>
     <string name="time_sample">10:00AM</string>
+    <string name="home_head_title">Do not forget to.... </string>
 </resources>

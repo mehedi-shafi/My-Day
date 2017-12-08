@@ -31,7 +31,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
-        String CREATE_EVENT_TABLE = "CREATE TABLE " + VARS.TABLE_NAME + "(" + VARS.ID_NAME + " INTEGER PRIMARY KEY, "
+        String CREATE_EVENT_TABLE = "CREATE TABLE " + VARS.TABLE_NAME + "(" + VARS.ID_NAME + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
                 + VARS.DATE + " TEXT, " + VARS.TIME + " TEXT, " + VARS.TITLE + " TEXT, " + VARS.DESCRIPTION + " TEXT, "
                 + VARS.STATUS + " TEXT);";
         sqLiteDatabase.execSQL(CREATE_EVENT_TABLE);
@@ -52,11 +52,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
-            DayTask dayTask = new DayTask(cursor.getInt(cursor.getColumnIndex(VARS.ID_NAME)), Utilities.getBool(cursor.getString(cursor.getColumnIndex(VARS.STATUS))),
+            DayTask dayTask = new DayTask(cursor.getInt(cursor.getColumnIndex(VARS.ID_NAME)), cursor.getString(cursor.getColumnIndex(VARS.STATUS)),
                     cursor.getString(cursor.getColumnIndex(VARS.TITLE)), cursor.getString(cursor.getColumnIndex(VARS.DESCRIPTION)),
                     cursor.getString(cursor.getColumnIndex(VARS.DATE)), cursor.getString(cursor.getColumnIndex(VARS.TIME)));
             tasks.add(dayTask);
+            cursor.moveToNext();
         }
+        cursor.close();
+        db.close();
         return tasks;
     }
 
@@ -67,11 +70,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
-            DayTask dayTask = new DayTask(cursor.getInt(cursor.getColumnIndex(VARS.ID_NAME)), Utilities.getBool(cursor.getString(cursor.getColumnIndex(VARS.STATUS))),
+            DayTask dayTask = new DayTask(cursor.getInt(cursor.getColumnIndex(VARS.ID_NAME)), cursor.getString(cursor.getColumnIndex(VARS.STATUS)),
                     cursor.getString(cursor.getColumnIndex(VARS.TITLE)), cursor.getString(cursor.getColumnIndex(VARS.DESCRIPTION)),
                     cursor.getString(cursor.getColumnIndex(VARS.DATE)), cursor.getString(cursor.getColumnIndex(VARS.TIME)));
             tasks.add(dayTask);
+            cursor.moveToNext();
         }
+        cursor.close();
+        db.close();
         return tasks;
     }
 
@@ -80,12 +86,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ArrayList<DayTask> tasks = new ArrayList<>();
         String query = "SELECT * FROM " + VARS.TABLE_NAME + " WHERE " + VARS.DATE  + " = '" + date + "' AND " + VARS.STATUS + " = 'false'";
         Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
         while(!cursor.isAfterLast()){
-            DayTask dayTask = new DayTask(cursor.getInt(cursor.getColumnIndex(VARS.ID_NAME)), Utilities.getBool(cursor.getString(cursor.getColumnIndex(VARS.STATUS))),
+            tasks.add(new DayTask(cursor.getInt(cursor.getColumnIndex(VARS.ID_NAME)), cursor.getString(cursor.getColumnIndex(VARS.STATUS)),
                     cursor.getString(cursor.getColumnIndex(VARS.TITLE)), cursor.getString(cursor.getColumnIndex(VARS.DESCRIPTION)),
-                    cursor.getString(cursor.getColumnIndex(VARS.DATE)), cursor.getString(cursor.getColumnIndex(VARS.TIME)));
-            tasks.add(dayTask);
+                    cursor.getString(cursor.getColumnIndex(VARS.DATE)), cursor.getString(cursor.getColumnIndex(VARS.TIME))));
+            System.out.println(cursor.getInt(cursor.getColumnIndex(VARS.ID_NAME)) + " " + cursor.getString(cursor.getColumnIndex(VARS.TITLE)));
+            cursor.moveToNext();
         }
+        cursor.close();
+        db.close();
         return tasks;
     }
 
@@ -94,7 +104,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(VARS.ID_NAME, task.getId());
         values.put(VARS.TITLE, task.getTitle());
         values.put(VARS.DESCRIPTION, task.getDescription());
         values.put(VARS.DATE, task.getDate());
@@ -103,12 +112,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         db.insert(VARS.TABLE_NAME, null, values);
         Toast.makeText(context, "Task Added Successfully", Toast.LENGTH_SHORT).show();
+        db.close();
     }
 
     public void markDone(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "UPDATE " + VARS.TABLE_NAME + " SET " + VARS.STATUS + " 'true' WHERE " + VARS.ID_NAME + " = '" + id + "'";
-        final Cursor cursor = db.rawQuery(query, null);
+        db.delete(VARS.TABLE_NAME, VARS.ID_NAME + " = ?", new String[]{String.valueOf(id)});
         Toast.makeText(context, "Task Done", Toast.LENGTH_SHORT).show();
+        db.close();
     }
 }

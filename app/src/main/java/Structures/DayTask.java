@@ -12,19 +12,19 @@ import java.util.Date;
 
 public class DayTask implements Serializable{
 
-    private static boolean status;
-    private static String title;
-    private static String description;
-    private static String date;
-    private static String time;
-    private static int id;
+    private String status;
+    private String title;
+    private String description;
+    private String date;
+    private String time;
+    private int id;
 
 
     public DayTask(){
 
     }
 
-    public DayTask(int id, boolean status, String title, String description, String date, String time){
+    public DayTask(int id, String status, String title, String description, String date, String time){
         this.id = id;
         this.status = status;
         this.title = title;
@@ -33,7 +33,7 @@ public class DayTask implements Serializable{
         this.time = time;
     }
 
-    public DayTask(boolean status, String title, String description, String date, String time){
+    public DayTask(String status, String title, String description, String date, String time){
         this.status = status;
         this.title = title;
         this.description = description;
@@ -43,16 +43,16 @@ public class DayTask implements Serializable{
 
 
     public void DONE(Activity activity){
-        this.status = true;
+        this.status = "true";
         Toast.makeText(activity, "Task done", Toast.LENGTH_SHORT).show();
     }
 
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
-        DayTask.status = status;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getTitle() {
@@ -60,7 +60,7 @@ public class DayTask implements Serializable{
     }
 
     public void setTitle(String title) {
-        DayTask.title = title;
+        this.title = title;
     }
 
     public String getDescription() {
@@ -68,7 +68,7 @@ public class DayTask implements Serializable{
     }
 
     public void setDescription(String description) {
-        DayTask.description = description;
+        this.description = description;
     }
 
     public String getDate() {
@@ -76,7 +76,7 @@ public class DayTask implements Serializable{
     }
 
     public void setDate(String date) {
-        DayTask.date = date;
+        this.date = date;
     }
 
     public String getTime() {
@@ -84,13 +84,13 @@ public class DayTask implements Serializable{
     }
 
     public void setTime(String time) {
-        DayTask.time = time;
+        this.time = time;
     }
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
-        DayTask.id = id;
+        this.id = id;
     }
 }
