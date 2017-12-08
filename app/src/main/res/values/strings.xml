@@ -12,4 +12,7 @@
     <string name="done">Done</string>
     <string name="description_hint">Add a Description</string>
     <string name="title">Give a title</string>
+    <string name="title_sample">Task to do</string>
+    <string name="description_sample">This is a sample task note</string>
+    <string name="time_sample">10:00AM</string>
 </resources>

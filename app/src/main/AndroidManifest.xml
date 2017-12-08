@@ -19,8 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NewTask"
-            android:theme="@style/AppTheme.popup"></activity>
+        <activity
+            android:name=".NewTask"
+            android:theme="@style/AppTheme.popup" />
+        <activity android:name=".TaskViewPop"></activity>
     </application>
 
 </manifest>

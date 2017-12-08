@@ -3,12 +3,78 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="5dp"
+                    android:layout_height="75dp"
+                    android:id="@+id/color_border"
+                    android:background="@color/shadow_dark"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textColor="@color/shadow_dark"
+                        android:textStyle="bold"
+                        android:text="@string/title_sample"
+                        android:id="@+id/task_title_row"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textStyle="italic"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/description_sample"
+                        android:id="@+id/description_row"/>
 
 
-    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="normal"
+                    android:textSize="15sp"
+                    android:layout_marginTop="60dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="@string/time_sample"
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/time_row"/>
+
+            </LinearLayout>
+            
+            <ImageView
+                android:layout_width="65dp"
+                android:layout_height="75dp"
+                android:scaleType="fitCenter"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/check_mark"
+                android:id="@+id/done_button_row"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
 
 </android.support.constraint.ConstraintLayout>

@@ -60,10 +60,25 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return tasks;
     }
 
+    public ArrayList<DayTask> getAllUndoneTasks(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<DayTask> tasks = new ArrayList<>();
+        String query = "SELECT * FROM " + VARS.TABLE_NAME + " WHERE " + VARS.STATUS + " = 'false'";
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            DayTask dayTask = new DayTask(cursor.getInt(cursor.getColumnIndex(VARS.ID_NAME)), Utilities.getBool(cursor.getString(cursor.getColumnIndex(VARS.STATUS))),
+                    cursor.getString(cursor.getColumnIndex(VARS.TITLE)), cursor.getString(cursor.getColumnIndex(VARS.DESCRIPTION)),
+                    cursor.getString(cursor.getColumnIndex(VARS.DATE)), cursor.getString(cursor.getColumnIndex(VARS.TIME)));
+            tasks.add(dayTask);
+        }
+        return tasks;
+    }
+
     public ArrayList<DayTask> getTaskOfDate(String date){
         SQLiteDatabase db = this.getReadableDatabase();
         ArrayList<DayTask> tasks = new ArrayList<>();
-        String query = "SELECT * FROM " + VARS.TABLE_NAME + " WHERE " + VARS.DATE  + " = '" + date + "'";
+        String query = "SELECT * FROM " + VARS.TABLE_NAME + " WHERE " + VARS.DATE  + " = '" + date + "' AND " + VARS.STATUS + " = 'false'";
         Cursor cursor = db.rawQuery(query, null);
         while(!cursor.isAfterLast()){
             DayTask dayTask = new DayTask(cursor.getInt(cursor.getColumnIndex(VARS.ID_NAME)), Utilities.getBool(cursor.getString(cursor.getColumnIndex(VARS.STATUS))),
@@ -90,4 +105,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         Toast.makeText(context, "Task Added Successfully", Toast.LENGTH_SHORT).show();
     }
 
+    public void markDone(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE " + VARS.TABLE_NAME + " SET " + VARS.STATUS + " 'true' WHERE " + VARS.ID_NAME + " = '" + id + "'";
+        final Cursor cursor = db.rawQuery(query, null);
+        Toast.makeText(context, "Task Done", Toast.LENGTH_SHORT).show();
+    }
 }
