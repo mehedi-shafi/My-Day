@@ -12,8 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TableLayout;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import Fragments.TaskList;
 import enf.course.project.myday.R;
@@ -50,13 +54,21 @@ public class ToDoFragment extends Fragment {
 
         Adapter adapter = new Adapter(getChildFragmentManager());
 
-        adapter.addFragment(new TaskList(), "Sat");
-        adapter.addFragment(new TaskList(), "Sun");
-        adapter.addFragment(new TaskList(), "Mon");
-        adapter.addFragment(new TaskList(), "Tue");
-        adapter.addFragment(new TaskList(), "Wed");
-        adapter.addFragment(new TaskList(), "Thu");
-        adapter.addFragment(new TaskList(), "Fri");
+        Calendar cal = Calendar.getInstance();
+        String myFormat = "MM/dd/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        String[] days = new String[] {"day", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+
+        for (int i = 0; i < 7; i++){
+            TaskList tempTask = new TaskList();
+            String todate = sdf.format(cal.getTime());
+            Bundle mBundle = new Bundle();
+            mBundle.putString("date", todate);
+            tempTask.setArguments(mBundle);
+            adapter.addFragment(tempTask, days[cal.get(Calendar.DAY_OF_WEEK)]);
+            cal.add(Calendar.DATE, 1);
+        }
 
         viewPager.setAdapter(adapter);
     }

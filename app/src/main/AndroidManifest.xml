@@ -4,9 +4,9 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:hardwareAccelerated="false"
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -24,7 +24,10 @@
         <activity
             android:name=".NewTask"
             android:theme="@style/AppTheme.popup" />
-        <activity android:name=".TaskViewPop"
+        <activity
+            android:name=".TaskViewPop"
+            android:theme="@style/AppTheme.popup" />
+        <activity android:name=".DayView"
             android:theme="@style/AppTheme.popup"></activity>
     </application>
 

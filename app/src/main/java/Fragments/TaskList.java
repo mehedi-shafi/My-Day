@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -36,6 +37,7 @@ public class TaskList extends Fragment{
     private ListView taskList;
     private TaskListAdapter listAdapter;
     private DatabaseHandler db;
+    private TextView dateView;
 
     private String todate;
 
@@ -53,11 +55,14 @@ public class TaskList extends Fragment{
             }
         });
 
+
+        Bundle dataBundle = getArguments();
+        todate = dataBundle.getString("date");
+
         taskList = (ListView) root.findViewById(R.id.task_list);
-        Calendar cal = Calendar.getInstance();
-        String myFormat = "MM/dd/yy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        todate = sdf.format(cal.getTime());
+        dateView = (TextView) root.findViewById(R.id.tasklist_date);
+
+        dateView.setText(todate);
 
         db = new DatabaseHandler(getActivity().getApplicationContext());
         listAdapter = new TaskListAdapter(getActivity(), R.layout.task_row, db.getTaskOfDate(todate));

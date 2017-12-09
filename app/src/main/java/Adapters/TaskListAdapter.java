@@ -15,6 +15,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 import Database.DatabaseHandler;
 import Structures.DayTask;
@@ -26,6 +29,10 @@ import enf.course.project.myday.TaskViewPop;
  */
 
 public class TaskListAdapter extends ArrayAdapter {
+
+    private Integer colors[] = new Integer[] {R.color.acceptance_blue, R.color.ash, R.color.black, R.color.bloody_orange, R.color.bloody_red, R.color.blue_900,
+                    R.color.bright_yellow, R.color.brown, R.color.dripping_red, R.color.blue_ash_grey, R.color.shadow_dark, R.color.cyan_bluish, R.color.cyan_bluish,
+                    R.color.deep_blue_grey, R.color.deep_teal, R.color.light_grey};
 
     private ArrayList<DayTask> tasks;
     private int layoutResource;
@@ -73,6 +80,7 @@ public class TaskListAdapter extends ArrayAdapter {
             holder.description = (TextView) row.findViewById(R.id.description_row);
             holder.time = (TextView) row.findViewById(R.id.time_row);
             holder.done = (ImageView) row.findViewById(R.id.done_button_row);
+            holder.colorBorder = (TextView) row.findViewById(R.id.color_border);
 
             row.setTag(holder);
         }
@@ -85,6 +93,8 @@ public class TaskListAdapter extends ArrayAdapter {
         holder.title.setText(holder.dayTask.getTitle());
         holder.description.setText(holder.dayTask.getDescription());
         holder.time.setText(holder.dayTask.getTime());
+        int rnd = new Random().nextInt(colors.length);
+        holder.colorBorder.setBackgroundResource(colors[rnd]);
 
         final DayTaskHolder finalHolder = holder;
 
@@ -117,6 +127,8 @@ public class TaskListAdapter extends ArrayAdapter {
     public class DayTaskHolder{
 
         DayTask dayTask;
+
+        TextView colorBorder;
 
         TextView title;
         TextView description;
