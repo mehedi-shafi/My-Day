@@ -34,17 +34,6 @@
 
         </LinearLayout>
 
-        <android.support.design.widget.FloatingActionButton
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@drawable/add_icon"
-            app:backgroundTint="@color/white"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="30dp"
-            android:layout_marginBottom="70dp"
-            android:id="@+id/add_floating_button"/>
-
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

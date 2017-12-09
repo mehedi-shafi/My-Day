@@ -2,5 +2,21 @@
     <string name="app_name">My Day</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Calendar</string>
-    <string name="title_notifications">To Do</string>
+    <string name="title_notifications">Week View</string>
+    <string name="date_picker">Click to pick date</string>
+    <string name="time_picker">Click to pick time</string>
+    <string name="go">Go</string>
+    <string name="add">Add</string>
+    <string name="delete">Delete</string>
+    <string name="success">Success</string>
+    <string name="done">Done</string>
+    <string name="description_hint">Add a Description</string>
+    <string name="title">Give a title</string>
+    <string name="title_sample">Task to do</string>
+    <string name="description_sample">This is a sample task note</string>
+    <string name="time_sample">10:00AM</string>
+    <string name="home_head_title">Do not forget to.... </string>
+    <string name="date_sample">12/09/2017</string>
+    <string name="send_message_description">Send this description as message</string>
+    <string name="mark_done">Done</string>
 </resources>
