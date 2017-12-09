@@ -1,6 +1,7 @@
 package enf.course.project.myday;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -88,6 +89,8 @@ public class NewTask extends AppCompatActivity {
                     dbh = new DatabaseHandler(getApplicationContext());
                     dbh.addTask(createTask());
                     Toast.makeText(NewTask.this, "Added successfully", Toast.LENGTH_SHORT).show();
+                    Intent returnIntent = new Intent();
+                    setResult(RESULT_OK, returnIntent);
                     NewTask.this.finish();
                 }
                 else{

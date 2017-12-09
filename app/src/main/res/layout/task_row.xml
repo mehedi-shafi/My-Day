@@ -65,14 +65,12 @@
             </LinearLayout>
             
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="19dp"
-                android:scaleType="fitCenter"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="23dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="5dp"
                 android:src="@drawable/check_mark"
-                android:background="@drawable/done_button_bg"
                 android:id="@+id/done_button_row"/>
 
         </RelativeLayout>

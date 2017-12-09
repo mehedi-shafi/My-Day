@@ -22,6 +22,9 @@ import enf.course.project.myday.MainActivity;
 import enf.course.project.myday.NewTask;
 import enf.course.project.myday.R;
 
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
+
 /**
  * Created by Shafi on 12/7/2017.
  */
@@ -32,6 +35,7 @@ public class HomeFragment extends Fragment {
     private ListView list;
     private DatabaseHandler dbh;
     private TaskListAdapter adapter;
+    private String todate;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,14 +52,14 @@ public class HomeFragment extends Fragment {
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), NewTask.class));
+                startActivityForResult(new Intent(getActivity(), NewTask.class), 1);
             }
         });
         list = (ListView) root.findViewById(R.id.home_task_list);
         Calendar cal = Calendar.getInstance();
         String myFormat = "MM/dd/yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        String todate = sdf.format(cal.getTime());
+        todate = sdf.format(cal.getTime());
 
         dbh = new DatabaseHandler(getActivity().getApplicationContext());
 
@@ -65,4 +69,20 @@ public class HomeFragment extends Fragment {
 
         return root;
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+
+            if(resultCode == RESULT_OK){
+                //Update List
+                adapter = new TaskListAdapter(getActivity(), R.layout.task_row, dbh.getTaskOfDate(todate));
+                list.setAdapter(adapter);
+            }
+            if (resultCode == RESULT_CANCELED) {
+                //Do nothing?
+            }
+        }
+    }//onActivityResult
 }

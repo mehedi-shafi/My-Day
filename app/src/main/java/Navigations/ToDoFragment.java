@@ -49,6 +49,7 @@ public class ToDoFragment extends Fragment {
     private void setupViewPager(ViewPager viewPager) {
 
         Adapter adapter = new Adapter(getChildFragmentManager());
+
         adapter.addFragment(new TaskList(), "Sat");
         adapter.addFragment(new TaskList(), "Sun");
         adapter.addFragment(new TaskList(), "Mon");

@@ -24,6 +24,9 @@ import enf.course.project.myday.MainActivity;
 import enf.course.project.myday.NewTask;
 import enf.course.project.myday.R;
 
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
+
 /**
  * Created by Shafi on 12/7/2017.
  */
@@ -33,6 +36,8 @@ public class TaskList extends Fragment{
     private ListView taskList;
     private TaskListAdapter listAdapter;
     private DatabaseHandler db;
+
+    private String todate;
 
     private FloatingActionButton add_button;
 
@@ -44,7 +49,7 @@ public class TaskList extends Fragment{
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), NewTask.class));
+                startActivityForResult(new Intent(getActivity(), NewTask.class), 1);
             }
         });
 
@@ -52,11 +57,10 @@ public class TaskList extends Fragment{
         Calendar cal = Calendar.getInstance();
         String myFormat = "MM/dd/yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        String todate = sdf.format(cal.getTime());
+        todate = sdf.format(cal.getTime());
 
         db = new DatabaseHandler(getActivity().getApplicationContext());
-        ArrayList<DayTask> data = db.getTaskOfDate(todate);
-        listAdapter = new TaskListAdapter(getActivity(), R.layout.task_row, data);
+        listAdapter = new TaskListAdapter(getActivity(), R.layout.task_row, db.getTaskOfDate(todate));
         taskList.setAdapter(listAdapter);
 
         listAdapter.notifyDataSetChanged();
@@ -68,4 +72,20 @@ public class TaskList extends Fragment{
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+
+            if(resultCode == RESULT_OK){
+                //Update List
+                listAdapter = new TaskListAdapter(getActivity(), R.layout.task_row, db.getTaskOfDate(todate));
+                taskList.setAdapter(listAdapter);
+            }
+            if (resultCode == RESULT_CANCELED) {
+                //Do nothing?
+            }
+        }
+    }//onActivityResult
 }

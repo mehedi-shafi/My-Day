@@ -10,7 +10,19 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="22sp"
+                android:text="@string/date_sample"
+                android:background="@color/light_grey"
+                android:textColor="@color/shadow_dark"
+                android:id="@+id/tasklist_date"/>
 
             <ListView
                 android:layout_width="wrap_content"
